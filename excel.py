@@ -40,19 +40,3 @@ class Excel():
 	# 获取某列
 	def get_col_values(self, col_index):
 		return self.sh.col_values(col_index)
-
-	def get_json_keys(self):
-		return self.get_row_values(0)
-		
-	def get_data4json(self):
-		keys = self.get_json_keys()
-		dic = {}
-		for x in xrange(1 , self.get_rows()):
-			dic[x] = {}
-			row_value = self.get_row_values(x)
-			for i in xrange(1, self.get_cols()):
-				print row_value[i]
-				dic[x][keys[i]] = row_value[i]
-			print
-
-		return dic

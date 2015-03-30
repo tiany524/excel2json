@@ -1,8 +1,7 @@
-#-*- coding: utf8 -*-
+# -*- coding: utf8 -*-
 
 from excel import Excel
 import os, json
-
 
 SUFFIX = "xls"
 
@@ -32,15 +31,40 @@ def write_json(file_name, data):
 	fp.write(encodedjson)
 	fp.close()
 
+def get_json_keys(excel):
+	return excel.get_row_values(0)
+
+def unic2str(s):
+	if type(s) == unicode:
+		s = s.encode("utf-8")
+	s = str(s) 
+	return s
+
+def get_data4json(excel):
+	keys = get_json_keys(excel)
+	dic = {}
+	for uid in xrange(1 , excel.get_rows()):
+		primary_key = str(uid)
+
+		dic[primary_key] = {}
+		row_value = excel.get_row_values(uid)
+		for i in xrange(1, excel.get_cols()):
+			key = unic2str(keys[i])
+			value = unic2str(row_value[i])
+			
+			dic[primary_key][key] = value
+
+	return dic
+
 
 def main():
-	for cell in get_xls_files():
-		excel_data = Excel(cell).get_data4json()
+	for path in get_xls_files():
+		excel = Excel(path)
+		data = get_data4json(excel)
 		
-		split_pre = cell.find(SUFFIX) - 1
-		name = cell[:split_pre] + ".json"
-		write_json(name, repr(excel_data))
-		
+		split_pre = path.find(SUFFIX) - 1
+		name = path[:split_pre] + ".json"
+		write_json(name, repr(data))
 
 if __name__ == '__main__':
 	main()
