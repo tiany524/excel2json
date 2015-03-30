@@ -7,10 +7,12 @@
 
 ## Usage
 
-+ 直接通过Python的环境执行, 需要安装xlrd
++ 直接通过Python的环境执行, 需要安装xlrd  
+
 `pip install xlrd`
 
-+ 通过exe执行(已经通过py2exe打包好了) 
++ 通过exe执行(已经通过py2exe打包好了)  
+
 ```
 cd dist
 ./excel2json.exe
