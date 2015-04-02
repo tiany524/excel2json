@@ -1,10 +1,3 @@
 
 *.pyc
-
 build/
-dist/
-! dist/excel2json.exe
-! dist/library.zip
-! dist/pyexpat.pyd
-! dist/python27.dll
-! dist/sample.xlsx
