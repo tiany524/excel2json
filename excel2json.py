@@ -31,6 +31,9 @@ class Setting():
 	def output_dir(self):
 		return self.data["output_dir"] + "/" or DEFAULT_PATH
 
+	def separator(self):
+		return self.data["separator"].encode("utf-8") or "|"
+
 
 setting = Setting("config.json")
 
@@ -73,7 +76,12 @@ def get_data4json(excel):
 		for i in xrange(1, excel.get_cols()):
 			key   = unic2str(keys[i])
 			value = unic2str(row_value[i])
-			
+
+			# delete remark of key.			
+			pos = key.find(setting.separator())
+			if pos > 0:
+				key = key[0:pos]
+
 			dic[primary_key][key] = value
 
 	return dic
@@ -92,3 +100,4 @@ def main():
 
 if __name__ == '__main__':
 	main()
+
