@@ -46,6 +46,7 @@ def get_xls_files(path = "."):
 
 def write_json(file_name, data):
 	file_name = setting.output_dir() + file_name
+	print file_name
 
 	fp = open(file_name, "w")
 	encodedjson = json.dumps(data, sort_keys=True)
@@ -65,7 +66,7 @@ def get_data4json(excel):
 
 	dic = {}
 	for uid in xrange(1 , excel.get_rows()):
-		primary_key = str(Ids[uid])
+		primary_key = str(int(Ids[uid]))
 
 		dic[primary_key] = {}
 		row_value = excel.get_row_values(uid)
