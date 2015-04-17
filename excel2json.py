@@ -49,7 +49,6 @@ def get_xls_files(path = "."):
 
 def write_json(file_name, data):
 	file_name = setting.output_dir() + file_name
-	print file_name
 
 	fp = open(file_name, "w")
 	encodedjson = json.dumps(data, sort_keys=True)
